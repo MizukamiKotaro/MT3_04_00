@@ -35,16 +35,18 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 	char preKeys[256] = {0};
 
 	Spring spring{};
-	spring.anchor = {};
-	spring.naturalLength = 1.0f;
+	spring.anchor = { 0.0f,1.0f,0.0f };
+	spring.naturalLength = 0.7f;
 	spring.stiffness = 100.0f;
 	spring.dampingCoefficient = 2.0f;
 
 	Ball ball{};
-	ball.position = { 1.2f,0.0f,0.0f };
+	ball.position = { 0.8f,0.2f,0.0f };
 	ball.mass = 2.0f;
 	ball.radius = 0.05f;
 	ball.color = 0x0000FFFF;
+
+	const MyVector3 kGravity{ 0.0f,-9.8f,0.0f };
 
 	bool start = false;
 
@@ -79,20 +81,14 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		}
 
 		if (start) {
-			BehaviorSpring(&spring, &ball);
+			BehaviorSpring(&spring, &ball, kGravity);
 		}
 
 		if (keys[DIK_R]) {
 			
-			spring.anchor = {};
-			spring.naturalLength = 1.0f;
-			spring.stiffness = 100.0f;
-			spring.dampingCoefficient = 2.0f;
+			spring.anchor = { 0.0f,1.0f,0.0f };
 
-			ball.position = { 1.2f,0.0f,0.0f };
-			ball.mass = 2.0f;
-			ball.radius = 0.05f;
-			ball.color = 0x0000FFFF;
+			ball.position = { 0.8f,0.2f,0.0f };
 
 			start = false;
 
